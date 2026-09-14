@@ -106,6 +106,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 </head>
 <body>
 <script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var metaId="{{META_PIXEL_ID}}";
+  if(metaId){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',metaId);
+    fbq('track','PageView');
+  }
+  var ttId="{{TIKTOK_PIXEL_ID}}";
+  if(ttId){
+    !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<e.methods.length;n++)ttq.setAndDefer(e,e.methods[n]);return e},ttq.load=function(e,n){var o="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=o,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=o+"?sdkid="+e+"&lib="+t;var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(a,s)};ttq.load(ttId);ttq.page()}(window,document,'ttq');
+  }
+})();
+</script>
 <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
 <nav>
   <div class="logo">{{BRAND_NAME_UPPER}}</div>
@@ -317,6 +331,8 @@ async function confirmPayment(total,fname){
   }
   if(paymentIntent&&paymentIntent.status==='succeeded'){
     const orderId=pendingOrderId;cart=[];updateCount();
+    if(window.fbq)fbq('track','Purchase',{value:Number(total),currency:'GBP',content_type:'product',contents:[]});
+    if(window.ttq)ttq.track('CompletePayment',{value:Number(total),currency:'GBP'});
     document.getElementById('overlayContent').innerHTML=`<div class="checkout-modal" onclick="event.stopPropagation()">
       <div class="success-screen">
         <div class="icon">✅</div>

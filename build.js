@@ -12,6 +12,8 @@ const vars = {
   ACCENT_COLOR: accent,
   ACCENT_COLOR_HEX: accent.replace("#", ""),
   SITE_URL: siteUrl,
+  META_PIXEL_ID: process.env.META_PIXEL_ID || "",
+  TIKTOK_PIXEL_ID: process.env.TIKTOK_PIXEL_ID || "",
 };
 
 function render(templatePath) {
