@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETS2 cargo weights: every cargo ranked, heaviest to lightest | {{BRAND_NAME}}</title>
+<meta name="description" content="All 378 Euro Truck Simulator 2 cargo types ranked by weight in tonnes, with search, a DLC filter and a heaviest or lightest toggle. The same cargos you get on TruckersMP.">
+<link rel="canonical" href="{{SITE_URL}}/tools/ets2-cargo-weights">
+{{TOOL_HEAD}}
+<style>
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;background:var(--concrete);padding:10px 0;z-index:2;border-bottom:1px solid var(--line)}
+.controls input,.controls select{font:inherit;color:var(--tarmac);background:var(--paper);border:1.5px solid var(--line);border-radius:6px;padding:9px 10px;min-width:0}
+.controls input{flex:1 1 220px}.controls select{flex:0 1 240px}
+.seg{display:flex;border:1.5px solid var(--tarmac);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-weight:600;font-size:15px;background:none;color:var(--tarmac);border:0;padding:9px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--tarmac);color:var(--paper)}
+.count{color:var(--steel);font-size:14px;font-variant-numeric:tabular-nums}
+ol{list-style:none;margin:0;padding:0}
+ol li{display:grid;grid-template-columns:3.2em minmax(0,1fr) 5.5em;gap:4px 12px;align-items:center;padding:9px 4px;border-bottom:1px solid var(--line)}
+.rank{font-family:var(--display);color:var(--steel);font-size:18px;text-align:right;font-variant-numeric:tabular-nums}
+.name{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.dlc{display:block;font-size:13.5px;color:var(--steel);font-weight:400}
+.dlc.base{color:var(--route)}
+.t{font-family:var(--display);font-size:22px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.t small{font-size:14px;color:var(--steel);margin-left:2px}
+.t.heavy{color:var(--heavy)}
+.bar{grid-column:2 / 4;height:5px;background:var(--line);border-radius:3px;position:relative;overflow:hidden}
+.bar i{position:absolute;top:0;bottom:0;left:0;border-radius:3px;background:#9aa5ab}
+.bar i.max{background:var(--motorway)}
+.unknown .t{color:var(--steel);font-size:15px;font-family:var(--body)}
+.empty{display:block;padding:28px 4px;color:var(--steel)}
+@media (max-width:480px){ol li{grid-template-columns:2.4em minmax(0,1fr) 4.8em;gap:4px 8px}.t{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+{{TOOL_TOP}}
+  <span class="plate" style="margin-top:26px">Free tool</span>
+  <h1>Every ETS2 cargo, heaviest to lightest</h1>
+  <p class="lede">All 378 current Euro Truck Simulator 2 cargo types, which are the same cargos you get on TruckersMP. Weights are in tonnes for a standard single trailer. Where a cargo comes in a range, it is ranked by the top of that range.</p>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search cargo…" aria-label="Search cargo">
+    <select id="dlc" aria-label="Filter by DLC"></select>
+    <div class="seg" role="group" aria-label="Sort order">
+      <button id="desc" type="button" aria-pressed="true">Heaviest first</button>
+      <button id="asc" type="button" aria-pressed="false">Lightest first</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+  <ol id="list"></ol>
+
+  <div class="notes">
+    <p>The blue part of each bar is the heaviest load you will see and the grey part is the lightest. Doubles, B-doubles, HCT and the DLC-only trailers can carry more or less than these figures.</p>
+    <p>"Base game" means it is in vanilla ETS2. Anything else needs that map or cargo DLC, and on TruckersMP you only get DLC cargo if you own the DLC. "Patch 1.xx" cargos came free in that update. Cargos marked "not listed" do not have a confirmed weight yet. Loaders were removed in 1.54, so they are left out.</p>
+    <p>Data: <a href="https://trucksimulator.wiki.gg/wiki/Cargo_types/Euro_Truck_Simulator_2" target="_blank" rel="noopener">The Truck Simulator Wiki, ETS2 cargo types</a>, pulled October 2026.</p>
+  </div>
+{{TOOL_FOOT}}
+</div>
+<script>
+const RAW=`{{CARGO_DATA}}`;
+const SCALE=80;
+const rows=RAW.trim().split('\n').map(l=>{
+  const [name,dlcRaw,w]=l.split('|');
+  const dlc=dlcRaw==='Launch'?'Base game':/^1\.\d+$/.test(dlcRaw)?'Patch '+dlcRaw+' (free)':dlcRaw+' DLC';
+  let min=null,max=null;
+  if(w!=='???'){const p=w.split(/[–-]/).map(Number);min=p[0];max=p[p.length-1];}
+  return {name,dlc,base:dlcRaw==='Launch',min,max};
+});
+const ranked=[...rows].sort((a,b)=>(b.max??-1)-(a.max??-1)||(b.min??-1)-(a.min??-1)||a.name.localeCompare(b.name));
+ranked.forEach((r,i)=>r.rank=r.max==null?null:i+1);
+const dlcs=[...new Set(rows.map(r=>r.dlc))].sort((a,b)=>a==='Base game'?-1:b==='Base game'?1:a.localeCompare(b));
+const sel=document.getElementById('dlc');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+sel.innerHTML='<option value="">All DLCs and base game</option>'+dlcs.map(d=>`<option>${esc(d)}</option>`).join('');
+let order='desc';
+const $q=document.getElementById('q'),$list=document.getElementById('list'),$count=document.getElementById('count');
+function render(){
+  const q=$q.value.trim().toLowerCase(), d=sel.value;
+  let list=ranked.filter(r=>(!q||r.name.toLowerCase().includes(q))&&(!d||r.dlc===d));
+  if(order==='asc'){const known=list.filter(r=>r.max!=null).reverse();list=known.concat(list.filter(r=>r.max==null));}
+  $count.textContent=`${list.length} cargo${list.length===1?'':'s'}`;
+  if(!list.length){$list.innerHTML='<li class="empty">No cargo matches that search. Try a shorter word or pick "All DLCs".</li>';return;}
+  $list.innerHTML=list.map(r=>{
+    const label=`<span class="name">${esc(r.name)}<span class="dlc${r.base?' base':''}">${esc(r.dlc)}</span></span>`;
+    if(r.max==null) return `<li class="unknown"><span class="rank">–</span>${label}<span class="t">not listed</span><span class="bar"></span></li>`;
+    const wt=r.min===r.max?`${r.max}`:`${r.min}–${r.max}`;
+    return `<li><span class="rank">${r.rank}</span>${label}<span class="t${r.max>=30?' heavy':''}">${wt}<small>t</small></span><span class="bar"><i class="max" style="width:${r.max/SCALE*100}%"></i><i style="width:${r.min/SCALE*100}%"></i></span></li>`;
+  }).join('');
+}
+function setOrder(o){order=o;document.getElementById('desc').setAttribute('aria-pressed',o==='desc');document.getElementById('asc').setAttribute('aria-pressed',o==='asc');render();}
+document.getElementById('desc').onclick=()=>setOrder('desc');
+document.getElementById('asc').onclick=()=>setOrder('asc');
+$q.addEventListener('input',render); sel.addEventListener('change',render);
+render();
+</script>
+<!--ANALYTICS--><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script><!--/ANALYTICS-->
+</body>
+</html>

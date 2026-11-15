@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triple-screen FOV calculator for sim racing and truck sims | {{BRAND_NAME}}</title>
+<meta name="description" content="Work out the correct field of view and side-monitor angle for a single or triple-screen sim rig from your monitor size, aspect ratio, bezel and viewing distance.">
+<link rel="canonical" href="{{SITE_URL}}/tools/triple-screen-fov">
+{{TOOL_HEAD}}
+<style>
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:20px}
+.panel h2{font-family:var(--display);font-size:26px;line-height:1.1;margin:0 0 14px}
+.field{display:block;font-weight:600;font-size:15px;margin:0 0 14px}
+.field input,.field select{display:block;width:100%;margin-top:6px;font:inherit;font-weight:400;color:var(--tarmac);background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:10px 11px}
+.field small{display:block;font-weight:400;color:var(--steel);margin-top:4px}
+.seg{display:flex;border:1.5px solid var(--tarmac);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.seg button{flex:1;font:inherit;font-weight:600;background:none;color:var(--tarmac);border:0;padding:10px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--tarmac);color:var(--paper)}
+.out{margin:0}
+.out div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.out div:last-child{border-bottom:0}
+.out dt{color:var(--steel)}
+.out dd{margin:0;font-family:var(--display);font-weight:700;font-size:32px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .main dd{color:var(--motorway);font-size:44px}
+svg.plan{display:block;width:100%;height:auto;margin-top:8px}
+.warn{color:var(--heavy);font-weight:600;margin:12px 0 0}
+@media (max-width:720px){.calc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+{{TOOL_TOP}}
+  <span class="plate" style="margin-top:26px">Free tool</span>
+  <h1>Triple-screen FOV calculator</h1>
+  <p class="lede">A correct field of view makes the world on screen the same size it would be through a real windscreen, so speed and distance look right. It depends on only two things: how big your screen is and how far your eyes are from it.</p>
+
+  <div class="calc">
+    <div class="panel">
+      <h2>Your setup</h2>
+      <div class="seg" role="group" aria-label="Number of screens">
+        <button type="button" id="n3" aria-pressed="true">Three screens</button>
+        <button type="button" id="n1" aria-pressed="false">One screen</button>
+      </div>
+      <label class="field">Screen size, measured corner to corner (inches)<input id="diag" type="number" inputmode="decimal" min="10" max="100" step="0.5" value="27"></label>
+      <label class="field">Aspect ratio<select id="ratio"><option value="16:9">16:9 (most monitors)</option><option value="16:10">16:10</option><option value="21:9">21:9 ultrawide</option><option value="32:9">32:9 super ultrawide</option><option value="4:3">4:3</option></select></label>
+      <label class="field">Bezel on one side of one screen (mm)<input id="bezel" type="number" inputmode="decimal" min="0" max="60" step="1" value="8"><small>The plastic edge between the picture and the next screen. Only matters with three screens.</small></label>
+      <label class="field">Distance from your eyes to the middle screen (cm)<input id="dist" type="number" inputmode="decimal" min="20" max="300" step="1" value="65"><small>Measure in your normal driving position.</small></label>
+    </div>
+    <div class="panel" aria-live="polite">
+      <h2>Your numbers</h2>
+      <dl class="out">
+        <div class="main"><dt id="lMain">Horizontal FOV across all three screens</dt><dd id="oTotal"></dd></div>
+        <div><dt>Horizontal FOV of one screen</dt><dd id="oH"></dd></div>
+        <div><dt>Vertical FOV</dt><dd id="oV"></dd></div>
+        <div id="rowAngle"><dt>Angle to set each side screen at</dt><dd id="oAngle"></dd></div>
+        <div><dt>Picture width of one screen</dt><dd id="oW"></dd></div>
+      </dl>
+      <svg class="plan" id="plan" viewBox="0 0 320 190" role="img" aria-label="Top-down view of the screens and your seat"></svg>
+      <p class="warn" id="warn" hidden></p>
+    </div>
+  </div>
+
+  <div class="notes">
+    <p>Sims do not all ask for the same number. Assetto Corsa's FOV setting is the vertical figure. Many others ask for the horizontal figure, and some triple-screen setup screens ask for monitor width, bezel, distance and side-screen angle instead, which are all listed above. Check which one your sim wants before typing it in.</p>
+    <p>The side-screen angle is the one that points each side screen straight at your eyes, so nothing looks stretched. If the correct FOV feels too narrow on a single screen, moving the screen closer does more than raising the number.</p>
+    <p>How it is worked out: picture width comes from the diagonal and the aspect ratio. One screen's horizontal FOV is 2 × atan(width ÷ (2 × distance)), and vertical FOV is the same sum using the picture height. With three screens the bezels are added to the width, and the total is three times one screen.</p>
+  </div>
+{{TOOL_FOOT}}
+</div>
+<script>
+(function(){
+  var screens=3,$=function(i){return document.getElementById(i)},deg=function(r){return r*180/Math.PI};
+  function fmt(d){return (Math.round(d*10)/10).toFixed(1)+"°"}
+  function calc(){
+    var diag=parseFloat($("diag").value)||0,dist=parseFloat($("dist").value)||0,bezel=Math.max(0,parseFloat($("bezel").value)||0);
+    var ar=$("ratio").value.split(":").map(Number),k=Math.sqrt(ar[0]*ar[0]+ar[1]*ar[1]);
+    var w=diag*2.54*ar[0]/k,h=diag*2.54*ar[1]/k;                 // picture width and height in cm
+    var ok=diag>0&&dist>0;
+    var wTriple=w+2*bezel/10;                                      // one screen plus its two bezels
+    var hOne=ok?deg(2*Math.atan(w/(2*dist))):0;
+    var hPer=ok?deg(2*Math.atan(wTriple/(2*dist))):0;
+    var v=ok?deg(2*Math.atan(h/(2*dist))):0;
+    var total=screens===3?hPer*3:hOne;
+    $("lMain").textContent=screens===3?"Horizontal FOV across all three screens":"Horizontal FOV";
+    $("oTotal").textContent=ok?fmt(total):"–";
+    $("oH").textContent=ok?fmt(screens===3?hPer:hOne):"–";
+    $("oV").textContent=ok?fmt(v):"–";
+    $("oAngle").textContent=ok?fmt(hPer):"–";
+    $("oW").textContent=ok?(Math.round(w*10)/10).toFixed(1)+" cm":"–";
+    $("rowAngle").hidden=screens!==3;
+    var warn=$("warn");
+    if(ok&&screens===3&&total>=180){warn.hidden=false;warn.textContent="At this distance the three screens would wrap more than half way round you. Sit further back or check the measurements.";}
+    else warn.hidden=true;
+    draw(ok?(screens===3?hPer:hOne):0);
+  }
+  // Top-down plan: the seat at the bottom, screens drawn at the calculated angle.
+  function draw(per){
+    var svg=$("plan"),cx=160,cy=168,R=120;
+    if(!per){svg.innerHTML="";return}
+    var a=per*Math.PI/180,half=R*Math.tan(a/2);
+    var seg=function(mid){ // a screen tangent to the circle of radius R around the seat, centred on bearing mid
+      var mx=cx+R*Math.sin(mid),my=cy-R*Math.cos(mid),tx=Math.cos(mid),ty=Math.sin(mid);
+      return [mx-half*tx,my-half*ty,mx+half*tx,my+half*ty];
+    };
+    var mids=screens===3?[-a,0,a]:[0],out="";
+    var first=seg(mids[0]),last=seg(mids[mids.length-1]);
+    out+='<path d="M'+cx+" "+cy+"L"+first[0].toFixed(1)+" "+first[1].toFixed(1)+"M"+cx+" "+cy+"L"+last[2].toFixed(1)+" "+last[3].toFixed(1)+'" stroke="#9aa5ab" stroke-width="1.5" stroke-dasharray="5 5" fill="none"/>';
+    mids.forEach(function(m){var s=seg(m);out+='<line x1="'+s[0].toFixed(1)+'" y1="'+s[1].toFixed(1)+'" x2="'+s[2].toFixed(1)+'" y2="'+s[3].toFixed(1)+'" stroke="#1d5fa6" stroke-width="7" stroke-linecap="round"/>'});
+    out+='<circle cx="'+cx+'" cy="'+cy+'" r="9" fill="#1a2026"/><text x="'+cx+'" y="'+(cy+20)+'" text-anchor="middle" font-size="12" fill="#5b666e" font-family="Barlow,sans-serif">you</text>';
+    svg.innerHTML=out;
+  }
+  function set(n){screens=n;$("n3").setAttribute("aria-pressed",n===3);$("n1").setAttribute("aria-pressed",n===1);calc()}
+  $("n3").onclick=function(){set(3)};$("n1").onclick=function(){set(1)};
+  ["diag","ratio","bezel","dist"].forEach(function(i){$(i).addEventListener("input",calc)});
+  calc();
+})();
+</script>
+<!--ANALYTICS--><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script><!--/ANALYTICS-->
+</body>
+</html>

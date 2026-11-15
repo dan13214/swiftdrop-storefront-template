@@ -1,0 +1,378 @@
+Acetylene|Launch|9–19
+Acid|Launch|16–19
+Agricultural Telehandler Bobcat TL30.70|Bobcat Cargo Pack|???
+Air Conditioners|High Power Cargo Pack|16–33
+Air Conditioners|Greece|14–18
+Aircraft Tyres|Vive la France!|10–18
+Airmail|Vive la France!|6–10
+Almond|Launch|10–17
+Aluminium Ingots|West Balkans|23
+Aluminium Profiles|West Balkans|16
+Ammunition|Launch|10–18
+Anhydrous Ammonia|1.47|19–27
+Apples|Launch|9–20
+Arsenic|Launch|9–18
+Articulated Hauler Volvo A25G|Volvo Construction Equipment|25
+Asphalt Miller - AM 0880|Heavy Cargo Pack|44
+Atlantic Cod Fillet|Scandinavia|9–16
+Auger Wagon|Farm Machinery|7
+Autonomous Tractor|Farm Machinery|8
+Backflow Preventers|Vive la France!|13–23
+Backhoe Loader|Launch|8
+Backhoe Loader JCB 4CX|JCB Equipment Pack|8
+Barley|Scandinavia|14–24
+Basil|Vive la France!|14–24
+Batteries|1.57|???
+Beans|Launch|7–12
+Beef|Launch|12–20
+Beverages|Launch|10–28
+Big-Bags of Seeds|Launch|10–18
+Boiler Part|Special Transport|45
+Boric Acid|Vive la France!|9–16
+Bottled Water|Launch|13–23
+Brake Fluid|Scandinavia|2–5
+Brake Pads|Italia|11–20
+Bricks|Launch|17–19
+Campervans|West Balkans|6
+Canned Beans|Launch|9–16
+Canned Beef|Scandinavia|12–21
+Canned Iced Coffee|Vive la France!|12–21
+Canned Pork|Scandinavia|12–21
+Canned Sardines|Italia|10–18
+Canned Tuna|Scandinavia|10–18
+Carbon Black Powder|Italia|3–7
+Carbonated Water|Launch|13–23
+Carrots|Launch|7–16
+Cars|Launch|6–10
+Cars|Beyond the Baltic Sea|4
+Cauliflower|Launch|5–9
+Caviar|Scandinavia|8–14
+Cement|Launch|24–25
+Cheese|Launch|10–18
+Chemical Granules|1.59|???
+Chemical Sorbent|Launch|4–11
+Chemicals|Launch|15–18
+Chewing Gums|Launch|13–23
+Chicken Meat|Scandinavia|9–17
+Chimney Systems|Launch|10–18
+Chlorine|Launch|8–28
+Chocolate|Launch|13–23
+Clothes|Launch|8–18
+Coal|Launch|21–27
+Coconut Milk|Vive la France!|13–23
+Coconut Oil|Vive la France!|13–23
+Compact Generators JCB G100RS|JCB Equipment Pack|11
+Compactor Volvo SD160B|Volvo Construction Equipment|16
+Compressor Bobcat PA12.7v|Bobcat Cargo Pack|???
+Computer Processors|Vive la France!|2–3
+Concrete Beams|Heavy Cargo Pack|51
+Concrete Beams|Beyond the Baltic Sea|14
+Concrete Centring|Beyond the Baltic Sea|19
+Concrete Stairs|Beyond the Baltic Sea|18
+Construction Staircase|Special Transport|50
+Containerized Trees|Launch|2–4
+Contaminated Material|Launch|10–20
+Copper Roof Gutters|Launch|4–8
+Corks|Vive la France!|2–5
+Cottage Cheese|Scandinavia|10–18
+Cotton Harvester|Greece|30
+Crawler Carrier|1.57|11
+Crawler Tractor|High Power Cargo Pack|13
+Crawler Tractor|Farm Machinery|25
+Cut Flowers|Vive la France!|1
+Cyanide|Launch|11–22
+Diesel|Launch|20–25
+Diesel Generators|Vive la France!|12–21
+Disc Harrows|Farm Machinery|6
+Disinfectant|Scandinavia|9–16
+Disk Mower Krone EasyCut B 880 CV|KRONE Agriculture Equipment|2
+Dozer Crawl - Z35K|Heavy Cargo Pack|39
+Driller - D-50|High Power Cargo Pack|8
+Dry Milk|Launch|10–18
+Dryers|Launch|7–13
+Dynamite|Launch|9–17
+Electric Dumpster JCB HTD-5E|JCB Equipment Pack|3
+Electric Mini Excavator JCB 19C-E|JCB Equipment Pack|5
+Electrical Wiring|Scandinavia|8–15
+Electronics|Launch|4–8
+Empty Barrels|Scandinavia|5–9
+Empty Pallets|Launch|12–22
+Empty Spool|1.57|???
+Empty Wine Barrels|Vive la France!|4–8
+Empty Wine Bottles|Vive la France!|8–13
+Ethane|1.47|14–21
+Excavated Soil|Launch|22–27
+Excavator|Launch|21
+Excavator Bobcat E60|Bobcat Cargo Pack|???
+Excavator Bucket|Special Transport|25
+Excavator JCB 245XR|JCB Equipment Pack|28
+Excavator Volvo EC220E|Volvo Construction Equipment|20
+Excavator Volvo EW240E MH|Volvo Construction Equipment|26
+Exhaust Systems|Italia|3–7
+Explosives|Launch|6–12
+Feldbinder EUT|Feldbinder Trailer Pack|6
+Feldbinder KIP|Feldbinder Trailer Pack|6
+Feldbinder TSA ADR|Feldbinder Trailer Pack|6
+Feldbinder TSA LM|Feldbinder Trailer Pack|6
+Fertilizer|Launch|11–19
+Fertilizer Spreader|Farm Machinery|14
+Fireworks|Launch|5–9
+Fish Fingers|Scandinavia|9–17
+Floor Panels|Launch|19–21
+Flour|Launch|11–20
+Fluorine|Launch|6–13
+Forage Harvester|Farm Machinery|13
+Food Oil|1.55|22–27
+Forestry Crawler Excavator|Forest Machinery|17
+Forklift Bobcat D30|Bobcat Cargo Pack|???
+Forklifts|Launch|16–21
+Forwarder|Forest Machinery|20
+Fresh Fish|Scandinavia|10–18
+Fresh Herbs|Italia|3–5
+Frozen Hake|Scandinavia|10–17
+Frozen Octopi|Italia|8–14
+Fuel Oil|Vive la France!|20–25
+Fuel Tanker|Launch|9–19
+Fuel Tanks|Scandinavia|5–10
+Furniture|Launch|9–16
+Garlic|Scandinavia|7–12
+Gas Pipeline Parts|High Power Cargo Pack|21
+Giant Silo|Special Transport|40
+Glass Panels|Launch|19–21
+Gnocchi|Italia|10–18
+Goat Cheese|Launch|9–15
+Granite Cubes|Vive la France!|20–27
+Grapes|Launch|8–14
+Graphite Grease|Launch|9–16
+Grass Rolls|Launch|8–15
+Gravel|Launch|21–27
+Guard Rails|Scandinavia|12–22
+Gummy Bears|Vive la France!|12–21
+Harvesting Bins|Vive la France!|1–2
+Haul Truck Chassis|Special Transport|55
+Heat Exchanger|Special Transport|70
+Heavy Metals|Launch|10–20
+Helicopter - 1808TX|High Power Cargo Pack|3
+High Pressure Slide Valves|Vive la France!|10–19
+High-Tech Device|Special Transport|45
+High Voltage Cables|Vive la France!|12–21
+Honey|Launch|11–20
+Horse Trailer|Greece|7
+Hospital Waste|Launch|11–23
+Hot Chemicals|Launch|16–19
+Huge Tyres|Special Transport|20
+Hydrochloric Acid|Launch|17–21
+Hydrogen|Launch|2–5
+IBC Containers|Scandinavia|6–11
+Ice Cream|Launch|8–14
+Industrial Cable Reel|Heavy Cargo Pack|34
+Industrial Condenser|Special Transport|60
+Iron Pipes (large)|Launch|20
+Iron Pipes (small)|Launch|12
+Juice Concentrate|Vive la France!|13–28
+Kerosene|Launch|18–23
+Ketchup|Launch|8–15
+Mower Conditioner Krone BiG M 45|KRONE Agriculture Equipment|15
+Square Baler Krone BiG Pack 1290 HDP VC|KRONE Agriculture Equipment|10
+Forage Harvester Krone BiG X 1180|KRONE Agriculture Equipment|17
+Krone Box Liner|Krone Trailer Pack|10
+Krone Cool Liner|Krone Trailer Pack|8
+Wagon Krone GX 520|KRONE Agriculture Equipment|10
+Krone Profi Liner|Krone Trailer Pack|6
+Krone Profi Liner Building|Krone Trailer Pack|6
+Rotary Rakes Krone Swadro TC 1370|KRONE Agriculture Equipment|4
+Round Baler Krone VariPack V 190 XC|KRONE Agriculture Equipment|4
+Lamb Stomachs|Scandinavia|7–13
+Large Containers|1.57|???
+Large Tubes|Launch|21
+Lavender|Vive la France!|8–15
+Lead|Launch|9–18
+Lemonade|Launch|13–23
+Live Cattle|Scandinavia|23–25
+Live Pigs|1.47|10–11
+Liver Paste|Scandinavia|10–17
+Locomotive CZ LOKO EffiShunter 300|1.56|36
+Locomotive CZ LOKO EffiShunter 1000|Special Transport|80
+Locomotive CZ LOKO MUV 75|1.56|14
+Locomotive - Vossloh G6|Heavy Cargo Pack|61
+Log Harvester|Forest Machinery|22
+Log Stacker|Forest Machinery|54
+Logs|Launch|24
+Low Bed Semi-trailers|Launch|17
+LPG|Launch|10–22
+Lumber|Launch|15
+Luxury SUVs|Scandinavia|11
+Luxury Yacht|Launch|9
+Magnesium|Launch|8–17
+Maple Syrup|Launch|9–17
+Marble Blocks|Italia|12–21
+Marble Slab|Italia|23
+Mason Jars|Launch|4–7
+Massive Tech Part|Special Transport|44
+Material Handler|1.57|36
+Medical Equipment|Launch|3–5
+Medical Vaccines|Launch|3–5
+Mercuric Chloride|Launch|11–22
+Metal Beams|Beyond the Baltic Sea|23
+Metal Cans|Scandinavia|5–9
+Metal Centring|Heavy Cargo Pack|28
+Metal Coil|Italia|12
+Milk|Launch|11–28
+Mini Excavator Bobcat E10e|Bobcat Cargo Pack|???
+Mobile Air Compressor|1.59|???
+Mobile Crane - UTM SD-833|Heavy Cargo Pack|36
+Mobile Crusher|Heavy Cargo Pack|40
+Mobile Screener|Heavy Cargo Pack|39
+Mobile Stacker|Heavy Cargo Pack|10
+Mobile Traction Winch|Forest Machinery|11
+Motor Oil|Launch|7–18
+Motorcycle Tyres|Italia|10–22
+Motorcycles|Italia|8–15
+Mozzarella|Italia|11–20
+Mulcher|Forest Machinery|15
+Natural Rubber|Vive la France!|12–21
+Neon|Launch|8–17
+Nitrocellulose|Launch|6–13
+Nitrogen|Launch|9–18
+Non-alcoholic Beer|Launch|12–22
+Nuts|Launch|10–18
+Nylon Cord|Vive la France!|13–23
+Office Paper|Launch|10–18
+Oil|Launch|19–24
+Oil Filters|Launch|4–12
+Olive Oil|Italia|10–27
+Olive Trees|Iberia|2
+Olives|Vive la France!|10–18
+Onions|Scandinavia|10–17
+Oranges|Launch|11–20
+Ore|Launch|22–27
+Outdoor Floor Tiles|Launch|11–19
+Packaged Food|Launch|9–17
+Packed Glass|Launch|22
+Packed Lumber|1.57|???
+Pasta|Italia|11–20
+Peanut Butter|Launch|11–19
+Pears|Scandinavia|8–15
+Peas|Launch|10–18
+Performance Forks|Italia|9–16
+Pesticides|Launch|10–21
+Pesto|Italia|10–18
+Pet Food|Scandinavia|9–20
+Petrol|Launch|17–21
+Pickups|Greece|6
+Plant Substrate|Launch|9–17
+Planter|Farm Machinery|8
+Plastic Film Rolls|Scandinavia|5–18
+Plastic Granules|Launch|24–27
+Plastic Pipes|Launch|5
+Plumbing Supplies|Scandinavia|10–18
+Plums|Launch|9–16
+Polystyrene Boxes|Scandinavia|1–3
+Pork|Scandinavia|10–18
+Post Packages|Vive la France!|6–11
+Potassium|Launch|10–20
+Potassium Hydroxide|Launch|16–19
+Potatoes|Launch|12–22
+Potted Flowers|Scandinavia|2–3
+Powerpack JCB 1.25QE|JCB Equipment Pack|12
+Precast Stairs|Launch|12–22
+Pressure Tank|Launch|7
+Propane|1.47|13–19
+Prosciutto|Italia|9–16
+Protective Clothing|Vive la France!|11–20
+Pumps|Vive la France!|8–14
+Radiators|Launch|5–9
+Reflective Posts|Scandinavia|7–12
+Reinforcing Bars|Beyond the Baltic Sea|15
+Reservoir Tank|Launch|6
+Rice|Launch|8–22
+Rock Bucket Volvo SPN P T SEG|Volvo Construction Equipment|3
+Roller - DYNA CC-2200|High Power Cargo Pack|17
+Roof Tiles|Launch|11–19
+Roofing Felt|Launch|11–19
+Rooflights|Launch|6–11
+Rough Terrain Forklift|Greece|12
+Rye|Scandinavia|16–28
+Salmon Fillet|Scandinavia|8–14
+Salt & Spices|Scandinavia|6–16
+Sand|Launch|21–27
+Sandwich Panels|Launch|7–12
+Sausages|Scandinavia|10–17
+Sawdust Panels|Launch|12–21
+Scaffolding|Scandinavia|12–22
+Scooters|Italia|5–9
+Scrap Metals|Launch|21–26
+Sealed Bearings|Italia|13–23
+Service Boat|Special Transport|25
+Sheep Wool|Scandinavia|7–13
+Shock Absorbers|Scandinavia|9–16
+Silica|Vive la France!|11–19
+Site Dumper JCB 6T-2|JCB Equipment Pack|5
+Skid-Steer Loader Bobcat S86|Bobcat Cargo Pack|???
+Skidder|Forest Machinery|20
+Smoked Eel|Scandinavia|6–11
+Smoked Sprats|Scandinavia|10–17
+Sodium|Launch|9–19
+Sodium Hydroxide|Launch|9–18
+Sodium Hypochlorite|Launch|15–18
+Soy Milk|Vive la France!|12–27
+Spherical Valves|Vive la France!|12–22
+Sprayer|Farm Machinery|15
+Square Baler|Farm Machinery|7
+Square Tubing|Italia|14
+Steel Cord|Vive la France!|8–14
+Stone Dust|Launch|22–27
+Stone Wool|Scandinavia|3–5
+Stones|Launch|21–27
+Straw Bales|Launch|3–7
+Sugar|Launch|12–22
+Sulphur|1.59|???
+Sulphuric Acid|Launch|10–25
+SUVs|Greece|12
+Tableware|Launch|9–16
+Telescopic Handler JCB 540-180|JCB Equipment Pack|11
+Tomatoes|Launch|10–18
+Toys|Launch|5–9
+Tracks|High Power Cargo Pack|11
+Tractor JCB Fastrac 4220|JCB Equipment Pack|9
+Tractors|Launch|8
+Transformer - PK900|Heavy Cargo Pack|47
+Train Axles|Beyond the Baltic Sea|23
+Train Undercarriage|Beyond the Baltic Sea|18
+Transmissions|Scandinavia|8–14
+Truck Batteries|Scandinavia|7–18
+Truck Rims|Scandinavia|4–12
+Truck Tyres|Scandinavia|7–13
+Trucks DAF|1.59|???
+Trucks Scania|Scandinavia|14
+Trucks Volvo|Scandinavia|14
+Tyres|Launch|9–16
+Underground Loader|Special Transport|54
+Used Car Batteries|Launch|9–17
+Used Packaging|Launch|11–20
+Used Plastics|Launch|3–9
+Vans|Italia|6
+Vans|Greece|8
+Ventilation Shaft|Launch|4
+Vinegar|Launch|4–15
+Wall Panels|Launch|19–20
+Water Tank|Greece|1–2
+Watermelons|Launch|11–20
+Wheat|Scandinavia|17–26
+Wheel Loader|Launch|15
+Wheel Loader Bobcat L95|Bobcat Cargo Pack|???
+Wheel Loader JCB 457|JCB Equipment Pack|20
+Wheel Loader Volvo L250H|Volvo Construction Equipment|35
+Wheels with Volvo Rims|Volvo Construction Equipment|11
+White Phosphorus|Launch|8–17
+Wind Turbine Blade|Special Transport|5
+Wind Turbine Nacelle|Scandinavia|21
+Wind Turbine Tower|Scandinavia|9–19
+Wood Bark|Scandinavia|6–9
+Wood Chipper|Forest Machinery|26
+Wood Shavings|Launch|3–6
+Wooden Beams|Scandinavia|6–13
+Work Clothes|Italia|9–16
+Yacht|High Power Cargo Pack|6
+Yoghurt|Launch|9–17
+Young Seedlings|Launch|2–3
