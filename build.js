@@ -21,6 +21,25 @@ const categories = (process.env.STORE_CATEGORIES ?? defaults.categories).split("
 const contact = process.env.CONTACT_EMAIL ? `Questions or a problem with an order: ${process.env.CONTACT_EMAIL}` : "";
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
+// Legal and contact pages (sim and toolkit sites only). They are built, and linked from the
+// footer and checkout, only when the seller's details are set on the Vercel project:
+//   LEGAL_NAME        the person or company the customer is buying from
+//   BUSINESS_ADDRESS  a postal address where the seller can be contacted
+//   CONTACT_EMAIL     the customer service address
+//   VAT_NUMBER        optional; leave unset if not VAT registered
+//   COMPANY_NUMBER    optional; set only if LEGAL_NAME is a limited company
+// A PREVIEW build shows highlighted placeholders for anything missing, so the pages can be read first.
+const LEGAL_UPDATED = "16 November 2026"; // change this whenever the wording in legal/ changes
+const legalPages = [
+  { slug: "terms", title: { sim: "Terms of sale", toolkit: "Terms of sale" } },
+  { slug: "returns", title: { sim: "Returns and refunds", toolkit: "Refunds and faulty files" } },
+  { slug: "privacy", title: { sim: "Privacy", toolkit: "Privacy" } },
+  { slug: "contact", title: { sim: "Contact", toolkit: "Contact" } },
+];
+const sellerSet = ["LEGAL_NAME", "BUSINESS_ADDRESS", "CONTACT_EMAIL"].every(k => (process.env[k] || "").trim());
+const legalOn = template !== "index" && (sellerSet || preview);
+const legalVal = (key, label) => (process.env[key] || "").trim() ? esc(process.env[key].trim()) : `<mark>[${label}]</mark>`;
+
 // Shown only in PREVIEW builds, and labelled as samples on the page.
 const samples = {
   sim: [
@@ -50,12 +69,39 @@ const vars = {
   TOOLKIT_PRODUCT_ID: process.env.TOOLKIT_PRODUCT_ID || "dg_job-pricing-toolkit",
   CONTACT_LINE: esc(contact),
 };
+if (legalOn) {
+  const name = legalVal("LEGAL_NAME", "your full legal name"), email = legalVal("CONTACT_EMAIL", "customer service email");
+  const company = (process.env.COMPANY_NUMBER || "").trim(), vat = (process.env.VAT_NUMBER || "").trim();
+  const who = company ? `${name}, a company registered in England and Wales (company number ${esc(company)})` : `${name}, a sole trader in England`;
+  Object.assign(vars, {
+    LEGAL_NAME: name,
+    BUSINESS_ADDRESS: legalVal("BUSINESS_ADDRESS", "business contact address"),
+    CONTACT_EMAIL: email,
+    CONTACT_EMAIL_LINK: process.env.CONTACT_EMAIL ? `<a href="mailto:${email}">${email}</a>` : email,
+    SELLER_WHO: who,
+    SELLER_LINE: `${vars.BRAND_NAME} is a trading name of ${who}.`,
+    VAT_LINE: vat ? `Prices include VAT. Our VAT registration number is ${esc(vat)}.` : `${vars.BRAND_NAME} is not registered for VAT, so no VAT is added to our prices.`,
+    VAT_SHORT: vat ? `VAT registration number ${esc(vat)}` : "Not VAT registered",
+    LEGAL_UPDATED,
+    LEGAL_ON: "true",
+    LEGAL_LINKS: legalPages.map(p => `<a href="/${p.slug}">${p.title[template]}</a>`).join(" · "),
+  });
+} else {
+  vars.LEGAL_LINKS = "";
+  vars.LEGAL_ON = "false";
+  if (template !== "index") console.warn("Legal pages NOT built: set LEGAL_NAME, BUSINESS_ADDRESS and CONTACT_EMAIL on this project. Do not take orders without them.");
+}
 // The original template printed these three unescaped; keep that behaviour for the 25 live sites.
 if (template === "index") Object.assign(vars, { BRAND_NAME: brandName, BRAND_NAME_UPPER: brandName.toUpperCase(), TAGLINE: process.env.TAGLINE || defaults.tagline });
 
 function fill(text, extra = {}) {
   for (const [key, val] of Object.entries({ ...extra, ...vars })) text = text.split(`{{${key}}}`).join(val);
   return text;
+}
+// Keep the blocks written for this kind of site (<!--SIM-->…<!--/SIM-->) and drop the other kind's.
+function only(text) {
+  const mine = template.toUpperCase(), other = template === "sim" ? "TOOLKIT" : "SIM";
+  return text.replace(new RegExp(`<!--${other}-->[\\s\\S]*?<!--/${other}-->`, "g"), "").split(`<!--${mine}-->`).join("").split(`<!--/${mine}-->`).join("");
 }
 function render(path, extra) {
   let text = fill(fs.readFileSync(path, "utf8"), extra);
@@ -89,6 +135,16 @@ if (template === "sim") {
     const slug = file.replace(".template.html", "");
     fs.writeFileSync(`dist/tools/${slug}.html`, render(`tools/${file}`, partials));
     pages.push(`tools/${slug}`);
+  }
+}
+
+if (legalOn) {
+  const shell = only(fs.readFileSync("legal/_shell.html", "utf8"));
+  for (const p of legalPages) {
+    const body = only(fs.readFileSync(`legal/${p.slug}.html`, "utf8")).trimEnd();
+    // Body first, so the placeholders inside it are filled by the same pass as the shell's.
+    fs.writeFileSync(`dist/${p.slug}.html`, fill(shell.split("{{LEGAL_BODY}}").join(body), { LEGAL_TITLE: p.title[template], LEGAL_SLUG: p.slug }));
+    pages.push(p.slug);
   }
 }
 

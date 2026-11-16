@@ -4,7 +4,7 @@
    A page sets window.SHOP_CONFIG before loading this file, then listens for
    the "shop:ready" event and draws its own product list. */
 (function () {
-  const cfg = Object.assign({ api: "", categories: [], preview: false, sampleProducts: [] }, window.SHOP_CONFIG || {});
+  const cfg = Object.assign({ api: "", categories: [], preview: false, legal: false, sampleProducts: [] }, window.SHOP_CONFIG || {});
   const state = { products: [], groups: [], cart: [], stripe: null, loadError: false, elements: null };
   const money = n => "£" + Number(n).toFixed(2);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -139,7 +139,8 @@
       (hasDigital ? '<label class="shop-check"><input id="shopConsent" type="checkbox"><span>Send my download straight away. I understand that once it starts I lose the 14-day right to cancel a digital purchase.</span></label>' : "") +
       '<p class="shop-error" id="shopError" role="alert" hidden></p>' +
       '<button class="shop-btn" id="shopPayStep" type="submit">Continue to payment</button></form>' +
-      '<p class="shop-muted">Card details are handled by Stripe. We never see them.</p>');
+      '<p class="shop-muted">Card details are handled by Stripe. We never see them.</p>' +
+      (cfg.legal ? '<p class="shop-muted">By paying you agree to our <a href="/terms" target="_blank" rel="noopener">terms of sale</a>. See also <a href="/returns" target="_blank" rel="noopener">returns and refunds</a> and <a href="/privacy" target="_blank" rel="noopener">privacy</a>.</p>' : ""));
     $("shopForm").addEventListener("submit", e => { e.preventDefault(); startPayment(t.physical, hasDigital); });
   }
   function fail(msg) { const e = $("shopError"); e.textContent = msg; e.hidden = false; }
