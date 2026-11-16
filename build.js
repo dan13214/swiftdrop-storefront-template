@@ -38,6 +38,13 @@ const legalPages = [
 ];
 const sellerSet = ["LEGAL_NAME", "BUSINESS_ADDRESS", "CONTACT_EMAIL"].every(k => (process.env[k] || "").trim());
 const legalOn = template !== "index" && (sellerSet || preview);
+// How the sim and toolkit sites sell:
+//   direct  - own basket and Stripe checkout. Only when the legal pages are on (seller details set, or a PREVIEW build).
+//   outside - no checkout here; buy buttons go to OUTSIDE_SHOP_URL (e.g. the Gumroad product or the Redbubble shop).
+//   closed  - no seller details and no outside shop: nothing can be bought, buttons say "on sale soon".
+const outsideUrl = (process.env.OUTSIDE_SHOP_URL || "").trim();
+if (outsideUrl && !/^https:\/\//.test(outsideUrl)) throw new Error("OUTSIDE_SHOP_URL must start with https://");
+const sellMode = template === "index" ? "direct" : legalOn ? "direct" : outsideUrl ? "outside" : "closed";
 const legalVal = (key, label) => (process.env[key] || "").trim() ? esc(process.env[key].trim()) : `<mark>[${label}]</mark>`;
 
 // Shown only in PREVIEW builds, and labelled as samples on the page.
@@ -68,6 +75,8 @@ const vars = {
   SAMPLE_PRODUCTS_JSON: JSON.stringify(preview ? samples : []).replace(/</g, "\\u003c"),
   TOOLKIT_PRODUCT_ID: process.env.TOOLKIT_PRODUCT_ID || "dg_job-pricing-toolkit",
   CONTACT_LINE: esc(contact),
+  SELL_MODE: sellMode,
+  OUTSIDE_URL_JSON: JSON.stringify(outsideUrl).replace(/</g, "\\u003c"),
 };
 if (legalOn) {
   const name = legalVal("LEGAL_NAME", "your full legal name"), email = legalVal("CONTACT_EMAIL", "customer service email");

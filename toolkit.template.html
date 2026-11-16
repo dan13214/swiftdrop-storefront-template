@@ -170,7 +170,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
   </div>
 </footer>
 
-<script>window.SHOP_CONFIG={api:"{{API_URL}}",categories:{{STORE_CATEGORIES_JSON}},preview:{{PREVIEW}},legal:{{LEGAL_ON}},sampleProducts:{{SAMPLE_PRODUCTS_JSON}}};</script>
+<script>window.SHOP_CONFIG={api:"{{API_URL}}",categories:{{STORE_CATEGORIES_JSON}},preview:{{PREVIEW}},legal:{{LEGAL_ON}},sell:"{{SELL_MODE}}",outside:{{OUTSIDE_URL_JSON}},sampleProducts:{{SAMPLE_PRODUCTS_JSON}}};</script>
 <script src="/shop.js"></script>
 <script>
 (function(){
@@ -189,7 +189,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
   var PRODUCT="{{TOOLKIT_PRODUCT_ID}}";
   document.addEventListener("shop:ready",function(){
     var g=Shop.groups().filter(function(x){return x.variants.some(function(v){return v.id===PRODUCT})})[0];
+    var cfg=window.SHOP_CONFIG;
     document.querySelectorAll("[data-buy]").forEach(function(b){
+      if(cfg.sell==="outside"){b.disabled=false;b.textContent="Buy the toolkit on Gumroad";b.addEventListener("click",function(){location.href=cfg.outside});return}
+      if(cfg.sell!=="direct"){b.textContent="On sale soon";return}
       if(!g){b.textContent=Shop.loadError()?"Shop unavailable: refresh to retry":"On sale soon";return}
       b.disabled=false;b.textContent="Buy the toolkit: "+Shop.money(g.from);
       b.addEventListener("click",function(){Shop.buyNow(PRODUCT)});

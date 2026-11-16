@@ -148,16 +148,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offs
   </footer>
 </div>
 
-<script>window.SHOP_CONFIG={api:"{{API_URL}}",categories:{{STORE_CATEGORIES_JSON}},preview:{{PREVIEW}},legal:{{LEGAL_ON}},sampleProducts:{{SAMPLE_PRODUCTS_JSON}}};</script>
+<script>window.SHOP_CONFIG={api:"{{API_URL}}",categories:{{STORE_CATEGORIES_JSON}},preview:{{PREVIEW}},legal:{{LEGAL_ON}},sell:"{{SELL_MODE}}",outside:{{OUTSIDE_URL_JSON}},sampleProducts:{{SAMPLE_PRODUCTS_JSON}}};</script>
 <script src="/shop.js"></script>
 <script>
 (function(){
   var filter="All";
+  if(window.SHOP_CONFIG.sell!=="direct")document.getElementById("basketBtn").hidden=true;
   document.getElementById("basketBtn").addEventListener("click",function(){Shop.toggleCart()});
   document.addEventListener("shop:cart",function(e){document.getElementById("basketCount").textContent=e.detail.count});
   document.addEventListener("shop:ready",draw);
   function draw(){
-    var groups=Shop.groups(),body=document.getElementById("shopBody"),esc=Shop.esc;
+    var groups=Shop.groups(),body=document.getElementById("shopBody"),esc=Shop.esc,cfg=window.SHOP_CONFIG;
+    if(cfg.sell==="outside"){body.innerHTML='<div class="empty"><strong>Our designs are on Redbubble.</strong>They print and post every order. <a href="'+esc(cfg.outside)+'">Go to the shop</a></div>';return}
+    if(cfg.sell!=="direct"){body.innerHTML='<div class="empty"><strong>The shop opens soon.</strong>The first designs are being proofed. The tools above are free in the meantime.</div>';return}
     if(Shop.loadError()){body.innerHTML='<div class="empty"><strong>The shop did not load.</strong>Refresh the page to try again. The tools above work either way.</div>';return}
     if(!groups.length){body.innerHTML='<div class="empty"><strong>Nothing on the shelves yet.</strong>The first designs are being proofed. The tools above are free in the meantime.</div>';return}
     var cats=groups.map(function(g){return g.category}).filter(function(c,i,a){return c&&a.indexOf(c)===i});

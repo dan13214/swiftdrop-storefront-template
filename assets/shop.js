@@ -4,7 +4,7 @@
    A page sets window.SHOP_CONFIG before loading this file, then listens for
    the "shop:ready" event and draws its own product list. */
 (function () {
-  const cfg = Object.assign({ api: "", categories: [], preview: false, legal: false, sampleProducts: [] }, window.SHOP_CONFIG || {});
+  const cfg = Object.assign({ api: "", categories: [], preview: false, legal: false, sell: "direct", outside: "", sampleProducts: [] }, window.SHOP_CONFIG || {});
   const state = { products: [], groups: [], cart: [], stripe: null, loadError: false, elements: null };
   const money = n => "£" + Number(n).toFixed(2);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -78,6 +78,7 @@
     return { sub, shipping, total: sub + shipping, physical };
   }
   function add(variantId, qty) {
+    if (cfg.sell !== "direct") return;
     const p = state.products.find(x => x.id === variantId); if (!p) return;
     const line = state.cart.find(x => x.id === variantId);
     if (line) line.qty = isDigital(variantId) ? 1 : Math.min(100, line.qty + qty);
@@ -119,7 +120,7 @@
 
   /* ── checkout ── */
   function checkout() {
-    if (!state.cart.length) return;
+    if (cfg.sell !== "direct" || !state.cart.length) return;
     toggleCart(false);
     const t = totals();
     const hasDigital = state.cart.some(i => isDigital(i.id));
